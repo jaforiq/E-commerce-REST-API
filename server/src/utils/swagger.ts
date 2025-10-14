@@ -13,7 +13,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: 'https://e-commerce-rest-api-s7u2.onrender.com',
         description: 'Development server',
       },
     ],
