@@ -2,7 +2,7 @@
 
 A simple E-commerce REST API built with **Node.js**, **Express**, and **MongoDB**. It supports CRUD operations for **Employees** and **Products**, along with optional role-based access, pagination, and search.
 
----
+## Live Server: [https://e-commerce-rest-api-s7u2.onrender.com/api-docs/](https://e-commerce-rest-api-s7u2.onrender.com/api-docs/)
 
 ## 🚀 Features
 
@@ -26,14 +26,21 @@ A simple E-commerce REST API built with **Node.js**, **Express**, and **MongoDB*
 
 ```bash
 git clone <your-repo-url>
-cd e-commerce-rest-api
+cd server
 npm install
+```
+
+## Change in file(For running in local)
+
+```bash
+Change mongodb url in Config/database.ts
+Change swagger url with your local url in utils/swagger.ts
 ```
 
 Create a `.env` file:
 
 ```
-PORT=4000
+PORT=3000
 MONGO_URI=mongodb://localhost:27017/ecommerce-db
 JWT_SECRET=your_secret
 ```
@@ -44,7 +51,7 @@ Run the server:
 npm run dev
 ```
 
-Server: [http://localhost:4000](http://localhost:4000)
+Live Swagger: [https://e-commerce-rest-api-s7u2.onrender.com/api-docs/](https://e-commerce-rest-api-s7u2.onrender.com/api-docs/)
 
 ---
 
