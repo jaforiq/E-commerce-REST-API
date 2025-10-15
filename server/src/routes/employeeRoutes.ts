@@ -1,27 +1,3 @@
-// import { Router } from 'express';
-// import { upload } from '../middleware/imageUpload';
-// import { authenticate, authorize } from '../middleware/auth';
-// import { create, deleteEmployee, getAll, getById, update } from '../controllers/employeeController';
-
-// const router = Router();
-
-// router.post('/', authenticate,
-//   authorize('admin', 'manager'),
-//   upload.single('image'),
-//   create
-// );
-// router.get('/', getAll);
-// router.get('/:id', getById);
-// router.put('/:id',authenticate, authorize('admin', 'manager'), upload.single('image'),update);
-// router.delete(
-//   '/:id',
-//   authenticate,
-//   authorize('admin'),
-//   deleteEmployee
-// );
-
-// export default router;
-
 import { Router } from 'express';
 import { upload } from '../middleware/imageUpload';
 import { authenticate, authorize } from '../middleware/auth';
@@ -66,7 +42,7 @@ const router = Router();
 router.post(
   '/',
   authenticate,
-  //authorize('admin', 'manager'),
+  authorize('admin', 'manager'),
   upload.single('image'),
   create
 );
@@ -94,7 +70,10 @@ router.post(
  *       200:
  *         description: List of employees
  */
-router.get('/', getAll);
+router.get('/',   
+  authenticate,
+  authorize('admin', 'manager'),
+  getAll);
 
 /**
  * @swagger
@@ -153,7 +132,7 @@ router.get('/:id', getById);
 router.put(
   '/:id',
   authenticate,
-  //authorize('admin', 'manager'),
+  authorize('admin', 'manager'),
   upload.single('image'),
   update
 );

@@ -1,6 +1,6 @@
 import { Request, RequestHandler, Response } from 'express';
 import { Product } from '../models/Product';
-import { bufferToBase64 } from '../middleware/imageUpload';
+//import { bufferToBase64 } from '../middleware/imageUpload';
 
 
   // Create product
@@ -10,7 +10,7 @@ import { bufferToBase64 } from '../middleware/imageUpload';
       
       let image: string | undefined;
       if (req.file) {
-        image = bufferToBase64(req.file);
+        image = `/uploads/${req.file.filename}`;
       }
 
       const product = await Product.create({
@@ -105,8 +105,9 @@ import { bufferToBase64 } from '../middleware/imageUpload';
         stock,
       };
 
+      let image: string | undefined;
       if (req.file) {
-        updateData.image = bufferToBase64(req.file);
+        image = `/uploads/${req.file.filename}`;
       }
 
       const product = await Product.findByIdAndUpdate(

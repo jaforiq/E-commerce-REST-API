@@ -1,43 +1,6 @@
-// import { Router } from 'express';
-// import { upload } from '../middleware/imageUpload';
-// import { authenticate, authorize } from '../middleware/auth';
-// import { create, getAll, getById, update, deleteProduct } from '../controllers/productController';
-
-// const router = Router();
-
-
-// router.post(
-//   '/',
-//   authenticate,
-//   authorize('admin', 'manager'),
-//   upload.single('image'),
-//   create
-// );
-
-// router.get('/', getAll);
-// router.get('/:id', getById);
-
-// router.put(
-//   '/:id',
-//   authenticate,
-//   authorize('admin', 'manager'),
-//   upload.single('image'),
-//   update
-// );
-
-
-// router.delete(
-//   '/:id',
-//   authenticate,
-//   authorize('admin'),
-//   deleteProduct
-// );
-
-// export default router;
-
 import { Router } from 'express';
-import { authenticate, authorize } from '../middleware/auth';
 import { upload } from '../middleware/imageUpload';
+import { authenticate, authorize } from '../middleware/auth';
 import { create, getAll, getById, update, deleteProduct } from '../controllers/productController';
 
 const router = Router();

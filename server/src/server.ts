@@ -1,4 +1,5 @@
 import cors from 'cors';
+import path from 'path';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import authRoutes from './routes/authRoutes';
@@ -9,9 +10,10 @@ import employeeRoutes from './routes/employeeRoutes';
 import express, { Application, Request, Response } from 'express';
 
 dotenv.config();
-//console.log('swagger paths:', Object.keys(swaggerSpec.paths));
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
+
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Middleware
 app.use(cors({
@@ -37,13 +39,12 @@ app.use('/api/employees', employeeRoutes);
 app.use('/api/products', productRoutes);
 
 
-
-app.use('*', (req: Request, res: Response) => {
-  res.status(404).json({
-    status: 'error',
-    message: `Route ${req.originalUrl} not found`,
-  });
-});
+// app.use('*', (req: Request, res: Response) => {
+//   res.status(404).json({
+//     status: 'error',
+//     message: `Route ${req.originalUrl} not found`,
+//   });
+// });
 
 
 // Start server
@@ -60,17 +61,5 @@ const startServer = async (): Promise<void> => {
     process.exit(1);
   }
 };
-
-// process.on('unhandledRejection', (err: Error) => {
-//   console.error('UNHANDLED REJECTION! 💥 Shutting down...');
-//   console.error(err.name, err.message);
-//   process.exit(1);
-// });
-
-// process.on('uncaughtException', (err: Error) => {
-//   console.error('UNCAUGHT EXCEPTION! 💥 Shutting down...');
-//   console.error(err.name, err.message);
-//   process.exit(1);
-// });
 
 startServer();

@@ -1,34 +1,60 @@
 import { Request, RequestHandler, Response } from 'express';
 import { Employee } from '../models/Employee';
-import { bufferToBase64 } from '../middleware/imageUpload';
+//import { bufferToBase64 } from '../middleware/imageUpload';
 
 
   // Create employee
-  export const create: RequestHandler = async(req: Request, res: Response): Promise<void> => {
-    try {
-      const { name, salary, role, permission } = req.body;
+//   export const create: RequestHandler = async(req: Request, res: Response): Promise<void> => {
+//     try {
+//       const { name, salary, role, permission } = req.body;
       
-      let image: string | undefined;
-      if (req.file) {
-        image = bufferToBase64(req.file);
-      }
-console.log(name, salary, role, permission);
-      const employee = await Employee.create({
-        name,
-        salary,
-        role,
-        permission: permission ? JSON.parse(permission) : ['read'],
-        image,
-      });
-console.log(employee);
-      res.status(201).json({
-        message: 'Employee created successfully',
-        employee,
-      });
-    } catch (error: any) {
-      res.status(400).json({ error: error.message });
+//       let image: string | undefined;
+//       if (req.file) {
+//         image = bufferToBase64(req.file);
+//       }
+// //console.log(name, salary, role, permission);
+//       const employee = await Employee.create({
+//         name,
+//         salary,
+//         role,
+//         permission: permission,
+//         image,
+//       });
+// //console.log(employee);
+//       res.status(201).json({
+//         message: 'Employee created successfully',
+//         employee,
+//       });
+//     } catch (error: any) {
+//       res.status(400).json({ error: error.message });
+//     }
+//   }
+  export const create: RequestHandler = async (req, res): Promise<void> => {
+  try {
+    const { name, salary, role, permission } = req.body;
+    
+    let image: string | undefined;
+    if (req.file) {
+      image = `/uploads/${req.file.filename}`;
     }
+
+    const employee = await Employee.create({
+      name,
+      salary,
+      role,
+      permission,
+      image,
+    });
+
+    res.status(201).json({
+      message: 'Employee created successfully',
+      employee,
+    });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
+};
+
 
   // Get all employees with pagination and search
   export const getAll: RequestHandler = async(req: Request, res: Response): Promise<void> => {
@@ -99,8 +125,9 @@ console.log(employee);
         permission: permission ? JSON.parse(permission) : undefined,
       };
 
+      let image: string | undefined;
       if (req.file) {
-        updateData.image = bufferToBase64(req.file);
+        image = `/uploads/${req.file.filename}`;
       }
 
       const employee = await Employee.findByIdAndUpdate(

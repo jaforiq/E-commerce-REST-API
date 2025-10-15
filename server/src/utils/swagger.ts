@@ -6,7 +6,7 @@ const options = {
     info: {
       title: 'E-Commerce API with TypeScript',
       version: '1.0.0',
-      description: 'RESTful API for managing employees and products with JWT authentication',
+      description: `RESTful API for managing employees and products with JWT authentication\n User Role: admin, manager, user\n Employee Role: admin, manager, employee, intern`,
       contact: {
         name: 'API Support',
       },

@@ -1,5 +1,3 @@
-
-
 import * as jwt from 'jsonwebtoken';
 import { User } from '../models/User';
 import { Request, RequestHandler, Response } from 'express';
@@ -25,7 +23,6 @@ export const register: RequestHandler = async (req: Request, res: Response): Pro
     });
 
     const payload: jwt.JwtPayload = { id: user._id.toString(), role: user.role };
-    //const token = jwt.sign(payload, secretkey, { expiresIn: JWT_EXPIRES_IN });
     const token = jwt.sign( payload, secretkey as string, { expiresIn: process.env.JWT_EXPIRES_IN || '1d' } as jwt.SignOptions);
 
     res.status(201).json({
