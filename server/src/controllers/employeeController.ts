@@ -1,34 +1,7 @@
-import { Request, RequestHandler, Response } from 'express';
 import { Employee } from '../models/Employee';
-//import { bufferToBase64 } from '../middleware/imageUpload';
+import { Request, RequestHandler, Response } from 'express';
 
 
-  // Create employee
-//   export const create: RequestHandler = async(req: Request, res: Response): Promise<void> => {
-//     try {
-//       const { name, salary, role, permission } = req.body;
-      
-//       let image: string | undefined;
-//       if (req.file) {
-//         image = bufferToBase64(req.file);
-//       }
-// //console.log(name, salary, role, permission);
-//       const employee = await Employee.create({
-//         name,
-//         salary,
-//         role,
-//         permission: permission,
-//         image,
-//       });
-// //console.log(employee);
-//       res.status(201).json({
-//         message: 'Employee created successfully',
-//         employee,
-//       });
-//     } catch (error: any) {
-//       res.status(400).json({ error: error.message });
-//     }
-//   }
   export const create: RequestHandler = async (req, res): Promise<void> => {
   try {
     const { name, salary, role, permission } = req.body;
